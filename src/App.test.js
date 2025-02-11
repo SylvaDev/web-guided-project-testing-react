@@ -18,6 +18,7 @@ test('fetches and renders mission data', async () => {
     const button = screen.getByRole('button');
     fireEvent.click(button);
 
+    // eslint-disable-next-line no-undef
     await wait();
 
     expect(screen.getAllByTestId("mission")).toHaveLength(2);
