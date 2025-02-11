@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react"
+import { fireEvent, render, screen } from "@testing-library/react"
 import React from "react";
 import MissionForm from "./MissionForm"
 
@@ -17,3 +17,12 @@ test('render the button when isFetchingData is false', () => {
     const value = screen.queryByRole('button');
     expect(value).not.toBeNull();
 });
+
+test('calls getData when the button is pressed', () => {
+    const mockGetData = jest.fn(() => {return ('hello')});
+    render(<MissionForm getData={mockGetData} />);
+    const button = screen.getByRole('button');
+    fireEvent.click(button);
+    console.log(mockGetData.mock);
+    expect(mockGetData.mock.calls).toHaveLength(1);
+})
