@@ -1,7 +1,8 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, wait } from "@testing-library/react";
 import React from "react";
 import App from "./App";
-import mockFetchMissions from './api/fetchMissions'
+import mockFetchMissions from './api/fetchMissions';
+jest.mock('./api/fetchMissions');
 
 test('app renders without errors', () => {
     render(<App />)
@@ -18,7 +19,6 @@ test('fetches and renders mission data', async () => {
     const button = screen.getByRole('button');
     fireEvent.click(button);
 
-    // eslint-disable-next-line no-undef
     await wait();
 
     expect(screen.getAllByTestId("mission")).toHaveLength(2);
